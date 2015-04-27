@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="" visible="true" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="client.Controller">
+  <children>
+    <AnchorPane fx:id="gameScreen" layoutX="0.0" layoutY="1.0" prefHeight="600.0" prefWidth="800.0" visible="true">
+      <children>
+        <AnchorPane id="canvas" fx:id="gameScreen" layoutX="0.0" layoutY="-1.0" prefHeight="554.9998779296875" prefWidth="800.0" />
+        <AnchorPane layoutX="0.0" layoutY="554.0" minHeight="46.0001220703125" prefHeight="46.0001220703125" prefWidth="800.0" style="-fx-background-color: #9B0A07;" visible="true">
+          <children>
+            <TextField fx:id="command" layoutX="400.0" layoutY="13.0" prefWidth="324.0" />
+            <Button fx:id="send" disable="true" layoutX="733.0" layoutY="14.0" mnemonicParsing="false" text="Send" />
+            <Button fx:id="exit" layoutX="12.0" layoutY="14.0" mnemonicParsing="false" text="Exit" />
+            <Label fx:id="response" layoutX="202.0" layoutY="16.0" prefWidth="187.0" text="" />
+            <Label fx:id="color" layoutX="70.0" layoutY="16.0" prefWidth="127.0" text="" />
+          </children>
+        </AnchorPane>
+      </children>
+    </AnchorPane>
+    <AnchorPane fx:id="menu" layoutX="0.0" layoutY="0.0" minHeight="88.0" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #9B0A07;" visible="true">
+      <children>
+        <AnchorPane fx:id="selection" layoutX="0.0" layoutY="188.0" prefHeight="412.0" prefWidth="800.0" visible="true">
+          <children>
+            <AnchorPane layoutX="0.0" layoutY="0.0" prefHeight="138.0" prefWidth="800.0" style="-fx-background-color: #ccc;">
+              <children>
+                <ChoiceBox fx:id="map" layoutX="264.0" layoutY="48.0" prefWidth="129.0">
+                  <items>
+                    <FXCollections fx:factory="observableArrayList">
+                      <String fx:value="Item 1" />
+                      <String fx:value="Item 2" />
+                      <String fx:value="Item 3" />
+                    </FXCollections>
+                  </items>
+                </ChoiceBox>
+                <TextField fx:id="delay" layoutX="476.0" layoutY="48.0" prefWidth="46.0" promptText="delay" text="3" />
+                <Button fx:id="create" layoutX="459.0" layoutY="84.0" mnemonicParsing="false" text="Create" />
+                <Label layoutX="211.0" layoutY="14.0" prefWidth="266.0" text="Create new game:">
+                  <font>
+                    <Font name="RedOctober" size="20.0" fx:id="x3" />
+                  </font>
+                  <textFill>
+                    <Color blue="0.071" green="0.141" red="0.945" fx:id="x4" />
+                  </textFill>
+                </Label>
+                <Label layoutX="211.0" layoutY="51.0" prefWidth="46.0" text="MAP:" textFill="$x4">
+                  <font>
+                    <Font name="RedOctober" size="16.0" fx:id="x5" />
+                  </font>
+                </Label>
+                <Label font="$x5" layoutX="409.0" layoutY="51.0" prefWidth="63.0" text="delay:" textFill="$x4" />
+                <Label fx:id="newStatus" layoutX="211.0" layoutY="86.0" text="it is helper message" />
+              </children>
+            </AnchorPane>
+            <AnchorPane layoutX="0.0" layoutY="138.0" prefHeight="268.0" prefWidth="800.0" visible="true">
+              <children>
+                <Label font="$x3" layoutX="206.0" layoutY="24.0" prefWidth="254.0" text="Join existing game:" textFill="$x4" />
+                <ListView id="game" fx:id="games" editable="false" layoutX="206.0" layoutY="64.0" prefHeight="138.0" prefWidth="316.0" />
+                <Button fx:id="join" layoutX="476.0" layoutY="211.0" mnemonicParsing="false" text="Join" />
+              </children>
+            </AnchorPane>
+          </children>
+        </AnchorPane>
+        <AnchorPane fx:id="connection" layoutX="-2.0" layoutY="190.0" prefHeight="412.0" prefWidth="802.0" style="-fx-background-color: #CCC;" visible="true">
+          <children>
+            <Button fx:id="connect" layoutX="291.0" layoutY="224.0" mnemonicParsing="false" prefWidth="221.0" text="play a solo" textFill="#701313">
+              <font>
+                <Font name="RedOctober" size="24.0" />
+              </font>
+            </Button>
+            <AnchorPane layoutX="241.0" layoutY="165.0" minHeight="22.0" prefHeight="22.0" prefWidth="316.0" visible="true">
+              <children>
+                <TextField fx:id="host" layoutX="0.0" layoutY="0.0" prefWidth="249.0" promptText="server host" text="25.179.210.90" />
+                <TextField fx:id="port" layoutX="264.0" layoutY="0.0" prefWidth="52.0" promptText="port" text="123" />
+              </children>
+            </AnchorPane>
+            <Label font="$x3" layoutX="378.0" layoutY="195.0" text="and" textFill="$x4" />
+            <Label id="status" fx:id="connectionStatus" alignment="CENTER" layoutX="242.0" layoutY="265.0" minHeight="13.9998779296875" prefHeight="22.0" prefWidth="316.0" text="no errors" underline="false" visible="false">
+              <font>
+                <Font name="RedOctober" size="12.0" />
+              </font>
+            </Label>
+            <Label layoutX="241.0" layoutY="135.0" prefWidth="316.0001220703125" text="Enter server host and port" textFill="$x4">
+              <font>
+                <Font name="RedOctober" size="18.0" />
+              </font>
+            </Label>
+          </children>
+        </AnchorPane>
+        <Label layoutX="182.0" layoutY="89.0" prefHeight="20.999908447265625" text="Meanwhile in russia">
+          <font>
+            <Font name="RedOctober" size="36.0" />
+          </font>
+          <textFill>
+            <Color blue="0.035" green="0.035" red="0.035" fx:id="x1" />
+          </textFill>
+        </Label>
+      </children>
+    </AnchorPane>
+  </children>
+</AnchorPane>

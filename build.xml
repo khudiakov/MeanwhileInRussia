@@ -1,0 +1,66 @@
+<project>
+
+    <target name="clean">
+        <delete dir="build"/>
+        <delete dir="doc"/>
+    </target>
+
+    <path id="external.classpath">
+        <pathelement location="examples/5x5.lab"/>
+        <pathelement location="examples/10x10.lab"/>
+        <pathelement location="examples/50x50.lab"/>
+        <pathelement location="/usr/local/share/Java/jre/lib/jfxrt.jar"/>
+    </path>
+
+    <target name="compile">
+        <mkdir dir="doc"/>
+        <javadoc    destdir="doc"
+                    author="true"
+                    version="true"
+                    use="true"
+                    windowtitle="Labyrinth game docs"
+        access="private">
+        <fileset dir="src/server/" includes="objects/">
+        <include name="Labyrinth.java"/>
+        </fileset>
+        </javadoc>
+        <mkdir dir="build/classes"/>
+        <javac includeantruntime="false" srcdir="src" destdir="build/classes">
+            <classpath>
+                <path refid="external.classpath" />
+            </classpath>
+        </javac>
+        <mkdir dir="build/jar"/>
+        <jar destfile="dest-server/Server.jar">
+            <fileset dir="build/classes" />
+            <fileset dir=".">
+                <include name="**/lib/**"/>
+                <include name="**/examples/**"/>
+            </fileset>
+            <manifest>
+                <attribute name="Main-Class" value="server.Server"/>
+            </manifest>
+        </jar>
+        <jar destfile="dest-client/Client.jar">
+            <fileset dir="build/classes" />
+            <fileset dir=".">
+                <include name="**/lib/**"/>
+                <include name="**/examples/**"/>
+            </fileset>
+            <manifest>
+                <attribute name="Main-Class" value="client.Main"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="run">
+        <parallel>
+            <java jar="dest-server/Server.jar" fork="true">
+                <arg value="32554"/>
+            </java>
+            <java jar="dest-client/Client.jar" fork="true"/>
+            <java jar="dest-client/Client.jar" fork="true"/>
+        </parallel>
+    </target>
+
+</project>
